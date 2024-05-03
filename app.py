@@ -1,13 +1,15 @@
 # /content/app.py
 
 import gradio as gr
-from modules import style, txt2img, img2img, pipeline
+from modules import style, txt2img, img2img, inpaint, pipeline
 from modules.style import css
 from modules.txt2img import txt2img
+from modules.img2img import img2img
+from modules.inpaint import inpaint
 from modules.pipeline import load_pipeline_txt2img
 from modules.pipeline import load_pipeline_img2img
+from modules.pipeline import load_pipeline_inpaint
 from modules.pipeline import update_scheduler
-from modules.img2img import img2img
 
 
 
