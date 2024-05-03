@@ -84,7 +84,8 @@ div.form {
 }
 .guidance_scale_t2i {
   top: -15px !important;
-  width: 915px !important; 
+  width: 915px !important;
+  z-index: 1 !important;
 }
 .seed_input_t2i {
   top: -15px !important;
@@ -193,15 +194,18 @@ div.form {
 }
 .guidance_scale_i2i {
   top: -15px !important;
-  width: 915px !important; 
+  width: 915px !important;
+  z-index: 1 !important;
 }
 .strength_i2i {
   top: -15px !important;
-  width: 915px !important; 
+  width: 915px !important;
+  z-index: 1 !important;
 }
 .seed_input_i2i {
   top: -15px !important;
-  width: 915px !important; 
+  width: 915px !important;
+  z-index: 1 !important;
 }
 
     /* 2ND COLUMN I2I */
@@ -298,15 +302,18 @@ div.form {
 }
 .guidance_scale_inpaint {
   top: -15px !important;
-  width: 915px !important; 
+  width: 915px !important;
+  z-index: 1 !important;
 }
 .strength_inpaint {
   top: -15px !important;
-  width: 915px !important; 
+  width: 915px !important;
+  z-index: 1 !important;
 }
 .seed_input_inpaint {
   top: -15px !important;
-  width: 915px !important; 
+  width: 915px !important;
+  z-index: 1 !important;
 }
 
     /* 2ND COLUMN INPAINT */
