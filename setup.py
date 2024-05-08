@@ -28,4 +28,9 @@ print("Downloading pre-trained models (facelib and CodeFormer)...")
 subprocess.run(['python', 'scripts/download_pretrained_models.py', 'facelib'])
 subprocess.run(['python', 'scripts/download_pretrained_models.py', 'CodeFormer'])
 
+# Install python dependencies from StableDIFF/requirements.txt
+print("Installing python dependencies from StableDIFF/requirements.txt...")
+stable_diff_requirements_path = '/content/StableDIFF/requirements.txt'
+subprocess.run(['pip', 'install', '-r', stable_diff_requirements_path])
+
 print("Installation and setup complete.")
