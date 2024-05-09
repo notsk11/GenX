@@ -1,36 +1,42 @@
 import os
 import subprocess
+import contextlib
 
-# Define the base path
-base_path = '/content/StableDIFF/repository/'
+if not os.path.exists('/content/StableDIFF/repository/'):
+    os.mkdir('/content/StableDIFF/repository/')
+else:
+    print("Directory already exists.")
 
-# Change to the base directory
-os.chdir(base_path)
+os.chdir('/content/StableDIFF/repository/')
 
-# Clone the CodeFormer repository
-print("Cloning CodeFormer repository...")
-subprocess.run(['git', 'clone', 'https://github.com/notsk11/CodeFormer'])
+if not os.path.exists('/content/StableDIFF/repository/CodeFormer/'):
+    with contextlib.redirect_stdout(None), contextlib.redirect_stderr(None):
+        result = subprocess.run(['git', 'clone', 'https://github.com/sczhou/CodeFormer'], cwd='/content/StableDIFF/repository/CodeFormer/')
+    
+    if result.returncode == 0:
+        print("Copied CodeFormer Repo")
+    else:
+        print("Failed to copy CodeFormer Repo")
+else:
+    print("CodeFormer repository already exists.")
 
-# Change to the CodeFormer directory
-codeformer_path = os.path.join(base_path, 'CodeFormer')
-os.chdir(codeformer_path)
+os.chdir('/content/StableDIFF/repository/CodeFormer/')
 
-# Install python dependencies from requirements.txt
-print("Installing python dependencies from requirements.txt...")
-subprocess.run(['pip', 'install', '-r', 'requirements.txt'])
+with contextlib.redirect_stdout(None), contextlib.redirect_stderr(None):
+    subprocess.run(['pip', 'install', '-r', 'requirements.txt', '-q'])
+    print("Installed CodeFormer Requirements")
 
-# Install basicsr using its setup.py script in develop mode
-print("Installing basicsr in develop mode...")
-subprocess.run(['python', 'basicsr/setup.py', 'develop'])
+process = subprocess.run(['python', 'basicsr/setup.py', 'develop'],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+print("Installed BasicSR")
 
-# Download the pre-trained models
-print("Downloading pre-trained models (facelib and CodeFormer)...")
 subprocess.run(['python', 'scripts/download_pretrained_models.py', 'facelib'])
 subprocess.run(['python', 'scripts/download_pretrained_models.py', 'CodeFormer'])
+print("Downloaded pre-trained models (facelib and CodeFormer)...")
 
-# Install python dependencies from StableDIFF/requirements.txt
-print("Installing python dependencies from StableDIFF/requirements.txt...")
-stable_diff_requirements_path = '/content/StableDIFF/requirements.txt'
-subprocess.run(['pip', 'install', '-r', stable_diff_requirements_path])
+os.chdir('/content/StableDIFF/')
 
+with contextlib.redirect_stdout(None), contextlib.redirect_stderr(None):
+    subprocess.run(['pip', 'install', '-r', 'requirements.txt', '-q'])
+    print("Installed StableDIFF Requirements")
 print("Installation and setup complete.")
