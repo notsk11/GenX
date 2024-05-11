@@ -9,6 +9,7 @@ def face_upscale_codeformer(latest_image):
     subprocess.run(['python', '/content/GenX/repository/CodeFormer/inference_codeformer.py',
                     '--input_path', '/content/GenX/images/inputs/',
                     '--output_path', '/content/GenX/images/results/',
+                    '--upscale', '1',
                     '--face_upsample',
                     '-w', '0.7'])
 
