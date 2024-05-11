@@ -71,8 +71,9 @@ div.form {
   width: 440px !important;
   height: 70px !important;
 }
-.fix_t2i {
-  top: -5px !important;
+.restore_faces_t2i {
+  top: 10px !important;
+  height: 55px !important;
 }
 .height_t2i {
   top: -15px !important;
