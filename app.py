@@ -65,7 +65,7 @@ with gr.Blocks(css=css) as demo:
       image_output_zoom_t2i = gr.Gallery(elem_classes="image_output_zoomed_t2i", container=True, interactive=True)
       load_model_t2i.click(fn=load_pipeline_txt2img, inputs=[model_global])
       scheduler_t2i.change(fn=update_scheduler, inputs=[scheduler_t2i])
-      generate_t2i.click(fn=txt2img, inputs=[restore_faces_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_input_t2i], outputs=[image_output_t2i, image_output_zoom_t2i, metadata_t2i])
+      generate_t2i.click(fn=txt2img, queue=True, inputs=[restore_faces_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_input_t2i], outputs=[image_output_t2i, image_output_zoom_t2i, metadata_t2i])
 
 
   with gr.Tab("Img2Img", elem_classes="img2img_tab1"):
@@ -116,7 +116,7 @@ with gr.Blocks(css=css) as demo:
           image_output_zoom_i2i = gr.Gallery(elem_classes="image_output_zoomed_i2i", container=True, interactive=True)
           load_model_i2i.click(fn=load_pipeline_img2img, inputs=[model_global])
           scheduler_i2i.change(fn=update_scheduler, inputs=[scheduler_i2i])
-          generate_i2i.click(fn=img2img, inputs=[prompt_i2i, negative_prompt_i2i, image_input_i2i, resize_mode_i2i, height_i2i, width_i2i, num_inference_steps_i2i, guidance_scale_i2i, strength_i2i, batch_count_i2i, seed_input_i2i], outputs=[image_output_i2i, image_output_zoom_i2i, metadata_i2i])
+          generate_i2i.click(fn=img2img, queue=True, inputs=[prompt_i2i, negative_prompt_i2i, image_input_i2i, resize_mode_i2i, height_i2i, width_i2i, num_inference_steps_i2i, guidance_scale_i2i, strength_i2i, batch_count_i2i, seed_input_i2i], outputs=[image_output_i2i, image_output_zoom_i2i, metadata_i2i])
 
 
       with gr.Tab("Inpaint", elem_classes="img2img_tab3"):
@@ -166,7 +166,8 @@ with gr.Blocks(css=css) as demo:
           image_output_zoom_inpaint = gr.Gallery(elem_classes="image_output_zoomed_inpaint", container=True, interactive=True)
           load_model_inpaint.click(fn=load_pipeline_inpaint, inputs=[model_global])
           scheduler_inpaint.change(fn=update_scheduler, inputs=[scheduler_inpaint])
-          generate_inpaint.click(fn=inpaint, inputs=[prompt_i2i, negative_prompt_i2i, image_input_inpaint, resize_mode_inpaint, mask_blur_inpaint, mask_mode_inpaint, masked_padding_inpaint, height_inpaint, width_inpaint, num_inference_steps_inpaint, guidance_scale_inpaint, strength_inpaint, batch_count_inpaint, seed_input_inpaint], outputs=[image_output_inpaint, image_output_zoom_inpaint, metadata_inpaint])
+          generate_inpaint.click(fn=inpaint, queue=True, inputs=[prompt_i2i, negative_prompt_i2i, image_input_inpaint, resize_mode_inpaint, mask_blur_inpaint, mask_mode_inpaint, masked_padding_inpaint, height_inpaint, width_inpaint, num_inference_steps_inpaint, guidance_scale_inpaint, strength_inpaint, batch_count_inpaint, seed_input_inpaint], outputs=[image_output_inpaint, image_output_zoom_inpaint, metadata_inpaint])
 
 
+demo.queue()
 demo.launch(share=True, debug=True)
