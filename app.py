@@ -47,7 +47,7 @@ with gr.Blocks(css=css) as demo:
               "DPM2-A-Karras",
               "DPM-2M-SDE",
               "DPM-2M-SDE-Karras"], value="DPM-SDE-Karras")
-              fix_t2i = gr.CheckboxGroup(choices=["Restore Faces", "Hires Fix"], container=False, elem_classes="fix_t2i")
+              restore_face_t2i = gr.Checkbox(label="Restore Faces", elem_classes="fix_t2i")
               height_t2i = gr.Slider(elem_classes="height_t2i", label="Height", minimum=100, maximum=1600, value=408, step=4)
               width_t2i = gr.Slider(elem_classes="width_t2i", label="Width", minimum=100, maximum=1600, value=408, step=4)
               with gr.Column():
@@ -65,7 +65,7 @@ with gr.Blocks(css=css) as demo:
       image_output_zoom_t2i = gr.Gallery(elem_classes="image_output_zoomed_t2i", container=True, interactive=True)
       load_model_t2i.click(fn=load_pipeline_txt2img, inputs=[model_global])
       scheduler_t2i.change(fn=update_scheduler, inputs=[scheduler_t2i])
-      generate_t2i.click(fn=txt2img, inputs=[prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_input_t2i], outputs=[image_output_t2i, image_output_zoom_t2i, metadata_t2i])
+      generate_t2i.click(fn=txt2img, inputs=[restore_face_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_input_t2i], outputs=[image_output_t2i, image_output_zoom_t2i, metadata_t2i])
 
 
   with gr.Tab("Img2Img", elem_classes="img2img_tab1"):
