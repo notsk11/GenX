@@ -27,7 +27,7 @@ def closest_divisible_by_8(number: int) -> int:
     else:
         return higher_nearest
 
-def txt2img(restore_face_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_int="", scheduler=None):
+def txt2img(restore_faces_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_int="", scheduler=None):
     if seed_int == "":
         seed = random.randint(0, sys.maxsize)
     else:
@@ -68,9 +68,12 @@ def txt2img(restore_face_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width
 
     # Open the latest image using PIL
     latest_image = Image.open(latest_file)
-    if restore_face_t2i == True:
+    if restore_faces_t2i == True:
         latest_image = face_upscale_codeformer(latest_image)
     # Convert to PIL image
     latest_image_pil = latest_image if isinstance(latest_image, Image.Image) else Image.fromarray(latest_image)
     
     return [latest_image_pil], [latest_image_pil], metadata_str
+
+
+
