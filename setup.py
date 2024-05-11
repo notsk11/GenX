@@ -9,16 +9,13 @@ else:
 
 os.chdir('/content/StableDIFF/repository/')
 
-if not os.path.exists('/content/StableDIFF/repository/CodeFormer/'):
-    with contextlib.redirect_stdout(None), contextlib.redirect_stderr(None):
-        result = subprocess.run(['git', 'clone', 'https://github.com/notsk11/CodeFormer'], cwd='/content/StableDIFF/repository/CodeFormer/')
-    
-    if result.returncode == 0:
-        print("Copied CodeFormer Repo")
-    else:
-        print("Failed to copy CodeFormer Repo")
+with contextlib.redirect_stdout(None), contextlib.redirect_stderr(None):
+    result = subprocess.run(['git', 'clone', 'https://github.com/notsk11/CodeFormer', '/content/StableDIFF/repository/CodeFormer/'])
+
+if result.returncode == 0:
+    print("Copied CodeFormer Repo")
 else:
-    print("CodeFormer repository already exists.")
+    print("Failed to copy CodeFormer Repo")
 
 os.chdir('/content/StableDIFF/repository/CodeFormer/')
 
