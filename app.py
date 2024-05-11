@@ -17,7 +17,7 @@ with gr.Blocks(css=css) as demo:
   with gr.Column():
     with gr.Row():
       with gr.Column():
-        model_global = gr.Textbox(label="Stable Diffusion Checkpoint", value="SG161222/Realistic_Vision_V6.0_B1_noVAE", elem_classes="model_global")
+        model_global = gr.Textbox(label="GenX Checkpoint", value="SG161222/Realistic_Vision_V6.0_B1_noVAE", elem_classes="model_global")
   with gr.Tab("Txt2Img", elem_classes="txt2img_tab1"):
     with gr.Column():
       with gr.Row():
