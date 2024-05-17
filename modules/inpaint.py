@@ -9,7 +9,7 @@ import torch
 from diffusers import DiffusionPipeline
 from modules import pipeline
 from modules import pipeline as pipe_module
-from modules.pipeline import load_pipeline_inpaint
+from modules.pipeline import load_model_onclick_inpaint
 from PIL import Image, ImageFilter, ImageOps
 
 # Define the function that ensures a number is divisible by 8 and close to the input value
@@ -108,7 +108,8 @@ def resize_and_fill(image, target_width, target_height):
         
     return canvas
 
-def inpaint(prompt_i2i, negative_prompt_i2i, image_input_inpaint, resize_mode_inpaint, mask_blur_inpaint, mask_mode_inpaint, masked_padding_inpaint, height_inpaint, width_inpaint, num_inference_steps_inpaint, guidance_scale_inpaint, strength_inpaint, batch_count_inpaint, seed_int="", scheduler=None):
+def inpaint(model_id, prompt_i2i, negative_prompt_i2i, image_input_inpaint, resize_mode_inpaint, mask_blur_inpaint, mask_mode_inpaint, masked_padding_inpaint, height_inpaint, width_inpaint, num_inference_steps_inpaint, guidance_scale_inpaint, strength_inpaint, batch_count_inpaint, seed_int="", scheduler=None):
+    load_model_onclick_inpaint(model_id)
     if seed_int == "":
         seed = random.randint(0, sys.maxsize)
     else:
