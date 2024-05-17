@@ -11,9 +11,10 @@ import subprocess
 from diffusers import DiffusionPipeline
 from modules import pipeline
 from modules import pipeline as pipe_module
-from modules.pipeline import load_pipeline_txt2img
+from modules.pipeline import load_model_onclick_t2i
 from modules import codeformer_upscale
 from modules.codeformer_upscale import face_upscale_codeformer
+
 # Define the function that ensures a number is divisible by 8 and close to the input value
 def closest_divisible_by_8(number: int) -> int:
     remainder = number % 8
@@ -27,7 +28,8 @@ def closest_divisible_by_8(number: int) -> int:
     else:
         return higher_nearest
 
-def txt2img(restore_faces_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_int="", scheduler=None):
+def txt2img(model_id, restore_faces_t2i, prompt_t2i, negative_prompt_t2i, height_t2i, width_t2i, num_inference_steps_t2i, guidance_scale_t2i, batch_count_t2i, seed_int="", scheduler=None):
+    load_model_onclick_t2i(model_id)
     if seed_int == "":
         seed = random.randint(0, sys.maxsize)
     else:
