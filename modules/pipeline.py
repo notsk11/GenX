@@ -1,6 +1,6 @@
 # /content/modules/pipeline.py
 
-from diffusers import StableDiffusionPipeline, StableDiffusionImg2ImgPipeline, StableDiffusionInpaintPipeline
+from diffusers import AutoPipelineForText2Image, AutoPipelineForImage2Image, AutoPipelineForInpainting
 from diffusers import (
     PNDMScheduler,
     DEISMultistepScheduler,
@@ -15,25 +15,55 @@ from diffusers import (
 )
 
 pipeline = None
+
+def pipeline_main_load(model_id):
+    pipeline_obj = AutoPipelineForText2Image.from_pretrained(model_id)
+    pipeline_obj.safety_checker = None
+    return pipeline_obj
+
+# Txt2Img Pipeline
+def load_model_onclick_t2i(model_id):
+    global pipeline
+    if pipeline is None:
+        pipeline = pipeline_main_load(model_id)
+        pipeline = load_pipeline_txt2img(model_id)
+    else:
+        pipeline = load_pipeline_txt2img(model_id)
+
 def load_pipeline_txt2img(model_id):
   global pipeline
-  pipeline = StableDiffusionPipeline.from_pretrained(model_id).to('cuda')
-  pipeline.safety_checker = None
+  pipeline = AutoPipelineForText2Image.from_pipe(pipeline).to('cuda')
   return pipeline
+
+# Img2Img Pipeline
+def load_model_onclick_i2i(model_id):
+    global pipeline
+    if pipeline is None:
+        pipeline = pipeline_main_load(model_id)
+        pipeline = load_pipeline_img2img(model_id)
+    else:
+        pipeline = load_pipeline_img2img(model_id)
 
 def load_pipeline_img2img(model_id):
   global pipeline
-  pipeline = StableDiffusionImg2ImgPipeline.from_pretrained(model_id).to('cuda')
-  pipeline.safety_checker = None
+  pipeline = AutoPipelineForImage2Image.from_pipe(pipeline).to('cuda')
   return pipeline
+
+# Inpaint Pipeline
+def load_model_onclick_inpaint(model_id):
+    global pipeline
+    if pipeline is None:
+        pipeline = pipeline_main_load(model_id)
+        pipeline = load_pipeline_inpaint(model_id)
+    else:
+        pipeline = load_pipeline_inpaint(model_id)
 
 def load_pipeline_inpaint(model_id):
   global pipeline
-  pipeline = StableDiffusionInpaintPipeline.from_pretrained(model_id).to('cuda')
-  pipeline.safety_checker = None
+  pipeline = AutoPipelineForInpainting.from_pipe(pipeline).to('cuda')
   return pipeline
 
-
+# Schedulers
 def update_scheduler(scheduler):
     if scheduler == "PNDM":
         input_scheduler = PNDMScheduler.from_pretrained("notsk007/PNDM")
