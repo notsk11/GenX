@@ -1,5 +1,11 @@
 # /content/modules/pipeline.py
 
+import warnings
+
+# Suppress the FutureWarning related to CLIPFeatureExtractor
+warnings.filterwarnings("ignore", category=FutureWarning, message=".*CLIPFeatureExtractor.*")
+
+# Your other imports
 from diffusers import AutoPipelineForText2Image, AutoPipelineForImage2Image, AutoPipelineForInpainting
 from diffusers import (
     PNDMScheduler,
@@ -14,12 +20,18 @@ from diffusers import (
     DPMSolverMultistepScheduler,
 )
 
+# Setting up logging to suppress specific warnings
+import logging
+logging.getLogger("diffusers.pipelines.stable_diffusion").setLevel(logging.ERROR)
+logging.getLogger("transformers").setLevel(logging.ERROR)
+
 pipeline = None
 
 def pipeline_main_load(model_id):
     pipeline_obj = AutoPipelineForText2Image.from_pretrained(model_id)
     pipeline_obj.safety_checker = None
     return pipeline_obj
+
 
 # Txt2Img Pipeline
 def load_model_onclick_t2i(model_id):
