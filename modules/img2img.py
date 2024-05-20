@@ -154,4 +154,4 @@ def img2img(model_id, prompt_i2i, negative_prompt_i2i, image_input_i2i, resize_m
         f"Guidance Scale: {guidance_scale_i2i}, Strength: {strength_i2i}"
     )
 
-    return images_pil, images_pil, metadata_str
+    return images_pil, metadata_str
