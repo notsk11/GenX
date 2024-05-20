@@ -177,4 +177,4 @@ def inpaint(model_id, prompt_i2i, negative_prompt_i2i, image_input_inpaint, resi
     # Construct metadata string
     metadata_str = f"Seed: {seed}, Prompt: {prompt_i2i}, Negative Prompt: {negative_prompt_i2i}, Height: {height_inpaint}, Width: {width_inpaint}, Num Inference Steps: {num_inference_steps_inpaint}, Guidance Scale: {guidance_scale_inpaint}, Strength: {strength_inpaint}, Batch Count: {batch_count_inpaint}"
 
-    return images_pil, images_pil, metadata_str
+    return images_pil, metadata_str
